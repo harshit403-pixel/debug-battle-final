@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://kodexdebugbattle4.onrender.com/api',
+  baseURL: 'https://kodexdebugbattle4.onrender.com',
   headers: { 'Content-Type': 'application/json' },
 });
 
