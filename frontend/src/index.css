@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────── */
+:root {
+  --bg-base: #0f1117;
+  --bg-card: #1a1d27;
+  --bg-elevated: #222535;
+  --border: #2e3347;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-muted: rgba(99,102,241,0.15);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+}
+
+/*
+ * IMPORTANT – Tailwind v4 puts all utilities inside @layer utilities.
+ * Any CSS written OUTSIDE a @layer block beats every layered rule,
+ * regardless of specificity.  The bare `* { padding: 0 }` below was
+ * silently nuking every px-*, py-*, gap-* class.
+ * Putting base/body resets inside @layer base keeps them below utilities.
+ */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-base); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+}
+
+/* ── Animations (keyframes are not layered — that's fine) ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Animation utility classes – inside @layer utilities so they
+      don't override Tailwind's own classes ───────────────── */
+@layer utilities {
+  .animate-fade-in  { animation: fadeIn  0.3s ease forwards; }
+  .animate-slide-in { animation: slideIn 0.25s ease forwards; }
+  .animate-spin     { animation: spin    0.8s linear infinite; }
+  .animate-toast    { animation: toastIn 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) forwards; }
+}
